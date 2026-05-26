@@ -6,12 +6,12 @@ import {
 const ICON_MAP = { Sun, Pill, Activity, Mic, ClipboardList, BookOpen }
 
 const NAV_ITEMS = [
-  { id: 'today',     label: 'Сегодня',   icon: 'Sun' },
-  { id: 'meds',      label: 'Препараты', icon: 'Pill' },
-  { id: 'exercise',  label: 'Спорт',     icon: 'Activity' },
+  { id: 'today',     label: 'Today',     icon: 'Sun' },
+  { id: 'meds',      label: 'Meds',      icon: 'Pill' },
+  { id: 'exercise',  label: 'Exercise',  icon: 'Activity' },
   { id: 'plaud',     label: 'Plaud',     icon: 'Mic' },
-  { id: 'hrplan',    label: 'HR-план',   icon: 'ClipboardList' },
-  { id: 'resources', label: 'Ресурсы',   icon: 'BookOpen' },
+  { id: 'hrplan',    label: 'HR Plan',   icon: 'ClipboardList' },
+  { id: 'resources', label: 'Resources', icon: 'BookOpen' },
 ]
 
 function NavItem({ item, active, onClick }) {
@@ -29,7 +29,7 @@ function NavItem({ item, active, onClick }) {
 
 export default function Layout({ page, setPage, children }) {
   const today = new Date()
-  const dateStr = today.toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' })
+  const dateStr = today.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long' })
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-stone-50">
@@ -38,7 +38,7 @@ export default function Layout({ page, setPage, children }) {
         <div className="mb-6 px-2">
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xl">🌿</span>
-            <span className="font-semibold text-stone-700 text-sm">Реинтеграция</span>
+            <span className="font-semibold text-stone-700 text-sm">Reintegration</span>
           </div>
           <p className="text-xs text-stone-400 capitalize">{dateStr}</p>
         </div>
@@ -54,7 +54,7 @@ export default function Layout({ page, setPage, children }) {
           ))}
         </nav>
 
-        <p className="text-xs text-stone-300 px-2 mt-4">Всё хранится локально</p>
+        <p className="text-xs text-stone-300 px-2 mt-4">All data stored locally</p>
       </aside>
 
       {/* Main content */}

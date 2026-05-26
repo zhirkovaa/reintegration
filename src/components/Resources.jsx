@@ -5,137 +5,137 @@ const SECTIONS = [
   {
     id: 'antidep',
     emoji: '💊',
-    title: 'Антидепрессанты: что важно знать',
+    title: 'Antidepressants: what you need to know',
     color: 'border-lavender-200 bg-lavender-50',
     headerColor: 'text-lavender-800',
     content: [
       {
-        heading: 'Когда начнёт действовать?',
-        text: `Антидепрессанты не работают мгновенно. Первый эффект обычно заметен через 2–4 недели, а полный терапевтический эффект — через 6–8 недель. Это нормально. Мозгу нужно время, чтобы перестроить нейронные связи.`,
+        heading: 'When will they start working?',
+        text: `Antidepressants don't work immediately. The first effects are usually noticeable after 2–4 weeks, with full therapeutic benefit at 6–8 weeks. This is normal. The brain needs time to rebuild neural pathways.`,
       },
       {
-        heading: 'Почему нельзя пропускать приём?',
-        text: `Антидепрессанты работают только при стабильной концентрации в крови. Пропущенная доза нарушает этот баланс. Принимайте каждый день в одно и то же время — это важнее, чем идеальное время суток.`,
+        heading: "Why you can't skip doses",
+        text: `Antidepressants only work with a stable blood concentration. A missed dose disrupts that balance. Take them every day at the same time — consistency matters more than the perfect time of day.`,
       },
       {
-        heading: 'Побочные эффекты',
-        text: `Первые 1–2 недели могут быть неприятными: тошнота, нарушения сна, тревожность. Это временно и проходит по мере адаптации. Если симптомы сильные — сообщите врачу, возможно скорректировать дозу или время приёма.`,
+        heading: 'Side effects',
+        text: `The first 1–2 weeks can be uncomfortable: nausea, sleep disruption, increased anxiety. This is temporary and fades as your body adjusts. If symptoms are severe, tell your doctor — the dose or timing can often be adjusted.`,
       },
       {
-        heading: 'Нельзя резко отменять',
-        text: `Самостоятельная отмена антидепрессантов может вызвать синдром отмены (головокружение, "прострелы", раздражительность). Снижение дозы всегда должно быть постепенным и под контролем врача.`,
+        heading: 'Never stop abruptly',
+        text: `Stopping antidepressants on your own can cause discontinuation syndrome (dizziness, "brain zaps", irritability). Any dose reduction should always be gradual and supervised by your doctor.`,
       },
       {
-        heading: 'Антидепрессант + терапия = лучший результат',
-        text: `Исследования показывают: сочетание медикаментов и психотерапии (КПТ, схема-терапия) даёт значительно лучший и устойчивый результат, чем только препараты или только терапия.`,
+        heading: 'Medication + therapy = best outcomes',
+        text: `Research consistently shows that combining medication with psychotherapy (CBT, schema therapy) gives significantly better and more durable results than either alone.`,
       },
       {
-        heading: 'Если первый препарат не подошёл',
-        text: `30–40% людей не получают полного облегчения от первого антидепрессанта. Это не неудача — это информация для врача. Подбор препарата — итеративный процесс, занимающий время. Не сдавайтесь.`,
+        heading: "If the first medication doesn't work",
+        text: `30–40% of people don't get full relief from their first antidepressant. This is not a failure — it's information for your doctor. Finding the right medication is an iterative process. Don't give up.`,
       },
     ],
   },
   {
     id: 'burnout',
     emoji: '🔥',
-    title: 'Бернаут и реинтеграция',
+    title: 'Burnout and reintegration',
     color: 'border-warm-200 bg-warm-50',
     headerColor: 'text-warm-800',
     content: [
       {
-        heading: 'Что такое бернаут?',
-        text: `Профессиональное выгорание — это хроническое истощение, цинизм и снижение эффективности, вызванные длительным стрессом. ВОЗ включила его в МКБ-11. Это не слабость характера — это физиологическая реакция нервной системы.`,
+        heading: 'What is burnout?',
+        text: `Occupational burnout is chronic exhaustion, cynicism, and reduced effectiveness caused by prolonged stress. The WHO included it in ICD-11. It is not a character flaw — it is a physiological response of the nervous system.`,
       },
       {
-        heading: 'Этапы восстановления',
-        text: `1. Признание и отдых — самый сложный шаг. Ничегонеделание — это не лень, это лечение.\n2. Стабилизация — восстановление базовых функций: сон, питание, минимальная активность.\n3. Реактивация — постепенное возвращение к деятельности, сначала приятной.\n4. Реинтеграция — возвращение к работе с новыми границами.`,
+        heading: 'Stages of recovery',
+        text: `1. Recognition and rest — the hardest step. Doing nothing is not laziness, it is treatment.\n2. Stabilisation — restoring basic functions: sleep, food, minimal movement.\n3. Reactivation — gradually returning to activities, starting with enjoyable ones.\n4. Reintegration — returning to work with new boundaries in place.`,
       },
       {
-        heading: 'Возвращение к работе',
-        text: `Успешная реинтеграция — постепенная. Начинайте с неполного дня, облегчённой нагрузки. Обсудите с менеджером и HR реалистичные ожидания. Ключевое: не компенсировать пропущенное резким ускорением.`,
+        heading: 'Returning to work',
+        text: `Successful reintegration is gradual. Start with reduced hours and lighter workload. Discuss realistic expectations with your manager and HR. The key: do not compensate for lost time with a sudden surge of effort.`,
       },
       {
-        heading: 'Границы — это не опционально',
-        text: `После бернаута мозг уязвим к перегрузкам. Установка границ — медицинская необходимость, а не каприз. Учитесь говорить "нет" и "мне нужно больше времени".`,
+        heading: 'Boundaries are not optional',
+        text: `After burnout, the brain is vulnerable to overload. Setting limits is a medical necessity, not a preference. Practice saying "no" and "I need more time."`,
       },
     ],
   },
   {
     id: 'lifestyle',
     emoji: '🌿',
-    title: 'Образ жизни и доказательная поддержка',
+    title: 'Lifestyle and evidence-based support',
     color: 'border-sage-200 bg-sage-50',
     headerColor: 'text-sage-800',
     content: [
       {
-        heading: 'Физическая активность',
-        text: `30 минут аэробной активности 3–5 раз в неделю снижают симптомы депрессии сопоставимо с антидепрессантами лёгкой-средней тяжести (мета-анализ 2023, Br J Sports Med). Любая активность лучше, чем никакой — даже прогулка.`,
+        heading: 'Physical activity',
+        text: `30 minutes of aerobic activity 3–5 times per week reduces depression symptoms comparably to antidepressants for mild-to-moderate cases (meta-analysis, Br J Sports Med 2023). Any movement is better than none — even a short walk counts.`,
       },
       {
-        heading: 'Сон',
-        text: `Нарушения сна и депрессия — двунаправленная связь. Приоритизируйте сон: постоянное время подъёма (даже в выходные), темнота и прохлада, ограничение экранов за час до сна. Если бессонница не проходит — сообщите врачу.`,
+        heading: 'Sleep',
+        text: `Sleep disruption and depression have a bidirectional relationship. Prioritise sleep: a consistent wake time (even on weekends), darkness and cool temperature, limiting screens an hour before bed. If insomnia persists, tell your doctor.`,
       },
       {
-        heading: 'Витамин D',
-        text: `Дефицит D3 ассоциирован с депрессией. Большинство людей в северных широтах имеют недостаточный уровень. Рекомендуемая доза для поддержания: 1000–2000 МЕ/день, лучше принимать с жирной едой. Проверьте уровень 25(OH)D с врачом.`,
+        heading: 'Vitamin D',
+        text: `Vitamin D deficiency is associated with depression. Most people at northern latitudes have insufficient levels. Recommended maintenance dose: 1000–2000 IU/day, ideally taken with a fatty meal. Check your 25(OH)D level with your doctor.`,
       },
       {
         heading: 'Omega-3',
-        text: `Омега-3 (особенно EPA) показали значительный антидепрессивный эффект в многочисленных РКИ. Минимально эффективная доза EPA — ~1000 мг/день. Ищите препараты с высоким содержанием EPA (а не только суммарных omega-3).`,
+        text: `Omega-3 fatty acids (especially EPA) have shown significant antidepressant effects across multiple RCTs. Minimum effective EPA dose: ~1000 mg/day. Look for supplements with a high EPA content (not just total omega-3).`,
       },
       {
-        heading: 'Магний',
-        text: `Дефицит магния распространён и связан с тревожностью и нарушениями сна. Глицинат или малат магния — лучшие формы по усвояемости и переносимости. Принимать лучше вечером.`,
+        heading: 'Magnesium',
+        text: `Magnesium deficiency is common and linked to anxiety and poor sleep. Magnesium glycinate or malate are the best-absorbed, best-tolerated forms. Best taken in the evening.`,
       },
       {
-        heading: 'Социальные связи',
-        text: `Изоляция усугубляет депрессию. Даже небольшие социальные контакты важны. Не ждите "подходящего момента" — маленькие шаги (написать другу, встретиться на 30 минут) работают.`,
+        heading: 'Social connection',
+        text: `Isolation worsens depression. Even small social contacts matter. Don't wait for the "right moment" — small steps (a text to a friend, a 30-minute meetup) work.`,
       },
     ],
   },
   {
     id: 'supplements',
     emoji: '🧪',
-    title: 'Суплементы и нутрицевтики',
+    title: 'Supplements and nutraceuticals',
     color: 'border-blue-100 bg-blue-50',
     headerColor: 'text-blue-800',
     content: [
       {
-        heading: 'Важное предупреждение',
-        text: `Суплементы — поддержка, но не замена лечения. Всегда обсуждайте их с врачом, особенно если принимаете антидепрессанты: некоторые взаимодействия опасны (например, зверобой + SSRI = серотониновый синдром).`,
+        heading: 'Important note',
+        text: `Supplements support treatment but do not replace it. Always discuss them with your doctor, especially if you are on antidepressants — some interactions are dangerous (e.g. St John's Wort + SSRIs = serotonin syndrome).`,
       },
       {
-        heading: 'Витамин B12 и фолат',
-        text: `Дефицит B12 и фолата снижает ответ на антидепрессанты. Фолат (метилфолат) участвует в синтезе серотонина. При депрессии часто рекомендуют активные формы: метилкобаламин и метилфолат (L-MTHF).`,
+        heading: 'Vitamin B12 and folate',
+        text: `Deficiencies in B12 and folate reduce antidepressant response. Folate (methylfolate) is involved in serotonin synthesis. Active forms are often recommended in depression: methylcobalamin and L-MTHF.`,
       },
       {
-        heading: 'Цинк',
-        text: `Цинк модулирует активность NMDA-рецепторов и серотониновую систему. Мета-анализы показывают снижение симптомов депрессии при добавлении цинка к лечению. 15–30 мг/день, с едой.`,
+        heading: 'Zinc',
+        text: `Zinc modulates NMDA receptor activity and the serotonin system. Meta-analyses show reduced depression symptoms when zinc is added to treatment. 15–30 mg/day, taken with food.`,
       },
       {
-        heading: 'Ашваганда',
-        text: `Адаптоген, снижающий уровень кортизола. Показал эффективность при тревожности и стрессе в РКИ. Важно: при биполярном расстройстве применять осторожно.`,
+        heading: 'Ashwagandha',
+        text: `An adaptogen that lowers cortisol levels. Shown to be effective for anxiety and stress in RCTs. Note: use with caution in bipolar disorder.`,
       },
     ],
   },
   {
     id: 'crisis',
     emoji: '🆘',
-    title: 'Если совсем тяжело',
+    title: 'If things feel unbearable',
     color: 'border-red-200 bg-red-50',
     headerColor: 'text-red-700',
     content: [
       {
-        heading: 'Телефоны доверия',
-        text: `Россия: 8-800-2000-122 (бесплатно, круглосуточно)\nМосква: 051 (городской) или +7 (495) 051\nМеждународный: befrienders.org`,
+        heading: 'Crisis lines',
+        text: `Russia: 8-800-2000-122 (free, 24/7)\nMoscow: 051 (landline) or +7 (495) 051\nInternational: befrienders.org`,
       },
       {
-        heading: 'Когда обращаться экстренно',
-        text: `Если у вас мысли о самоповреждении или суициде — это медицинская ситуация. Позвоните на горячую линию, в скорую (103) или попросите кого-то отвезти в ближайшую психиатрическую службу. Вы не одиноки.`,
+        heading: 'When to seek urgent help',
+        text: `If you have thoughts of self-harm or suicide — this is a medical situation. Call a crisis line, call emergency services (103), or ask someone to take you to the nearest psychiatric service. You are not alone.`,
       },
       {
-        heading: 'Напомнить врачу',
-        text: `Если состояние ухудшилось на фоне лечения — немедленно сообщите вашему психиатру. Не ждите следующего назначенного визита.`,
+        heading: 'Tell your doctor',
+        text: `If your condition has worsened while on treatment, contact your psychiatrist immediately. Don't wait for your next scheduled appointment.`,
       },
     ],
   },
@@ -176,14 +176,14 @@ export default function Resources() {
   return (
     <div className="fade-in space-y-4">
       <div>
-        <h1 className="text-xl font-semibold text-stone-700">Ресурсы</h1>
-        <p className="text-sm text-stone-400 mt-0.5">Знания — часть лечения</p>
+        <h1 className="text-xl font-semibold text-stone-700">Resources</h1>
+        <p className="text-sm text-stone-400 mt-0.5">Knowledge is part of recovery</p>
       </div>
 
       <div className="card bg-sage-50 border-sage-200">
         <p className="text-xs text-sage-700 leading-relaxed">
-          <strong>Важно:</strong> информация здесь носит образовательный характер и основана на научных исследованиях.
-          Она не заменяет консультацию с врачом. Все решения о лечении принимаются только совместно со специалистом.
+          <strong>Note:</strong> the information here is educational and based on scientific research.
+          It does not replace consultation with a doctor. All treatment decisions are made together with a specialist.
         </p>
       </div>
 
@@ -192,7 +192,7 @@ export default function Resources() {
       ))}
 
       <p className="text-xs text-stone-300 text-center pb-2">
-        Источники: WHO, NIMH, Cochrane Library, BMJ, Br J Sports Med
+        Sources: WHO, NIMH, Cochrane Library, BMJ, Br J Sports Med
       </p>
     </div>
   )

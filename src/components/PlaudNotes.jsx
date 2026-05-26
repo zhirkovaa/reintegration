@@ -4,10 +4,10 @@ import { Plus, X, Trash2, FileText, Search, ChevronLeft, Upload } from 'lucide-r
 import { db, toDateKey } from '../db.js'
 
 const CATEGORIES = [
-  { value: 'psychiatrist', label: 'Психиатр / Психолог', emoji: '🧠', color: 'bg-lavender-100 text-lavender-700' },
-  { value: 'manager',      label: 'Встреча с менеджером', emoji: '💼', color: 'bg-warm-100 text-warm-700' },
-  { value: 'conversation', label: 'Важный разговор',      emoji: '💬', color: 'bg-blue-50 text-blue-600' },
-  { value: 'solo',         label: 'Мои мысли (соло)',     emoji: '🌙', color: 'bg-stone-100 text-stone-600' },
+  { value: 'psychiatrist', label: 'Psychiatrist / Therapist', emoji: '🧠', color: 'bg-lavender-100 text-lavender-700' },
+  { value: 'manager',      label: 'Manager meeting',          emoji: '💼', color: 'bg-warm-100 text-warm-700' },
+  { value: 'conversation', label: 'Important conversation',   emoji: '💬', color: 'bg-blue-50 text-blue-600' },
+  { value: 'solo',         label: 'My thoughts (solo)',       emoji: '🌙', color: 'bg-stone-100 text-stone-600' },
 ]
 
 const catInfo = (v) => CATEGORIES.find(c => c.value === v) || CATEGORIES[3]
@@ -23,7 +23,7 @@ function AddNoteModal({ onSave, onCancel }) {
 
   const handleFile = (f) => {
     if (f && f.type === 'application/pdf') setFile(f)
-    else alert('Пожалуйста, выберите PDF-файл')
+    else alert('Please select a PDF file')
   }
 
   const handleDrop = (e) => {
@@ -49,15 +49,15 @@ function AddNoteModal({ onSave, onCancel }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
       <div>
-        <label className="label">Заголовок *</label>
+        <label className="label">Title *</label>
         <input className="input" value={form.title}
           onChange={e => set('title', e.target.value)}
-          placeholder="Например: Встреча с психиатром — начало лечения" required />
+          placeholder="E.g. First psychiatrist appointment" required />
       </div>
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="label">Категория</label>
+          <label className="label">Category</label>
           <select className="input" value={form.category} onChange={e => set('category', e.target.value)}>
             {CATEGORIES.map(c => (
               <option key={c.value} value={c.value}>{c.emoji} {c.label}</option>
@@ -65,7 +65,7 @@ function AddNoteModal({ onSave, onCancel }) {
           </select>
         </div>
         <div>
-          <label className="label">Дата</label>
+          <label className="label">Date</label>
           <input type="date" className="input" value={form.date}
             onChange={e => set('date', e.target.value)} />
         </div>
@@ -73,7 +73,7 @@ function AddNoteModal({ onSave, onCancel }) {
 
       {/* PDF upload */}
       <div>
-        <label className="label">PDF-файл (саммари из Plaud)</label>
+        <label className="label">PDF file (Plaud summary)</label>
         <div
           className={`border-2 border-dashed rounded-xl p-4 text-center cursor-pointer transition-colors ${
             dragOver ? 'border-sage-400 bg-sage-50' : 'border-stone-200 hover:border-stone-300'
@@ -95,8 +95,8 @@ function AddNoteModal({ onSave, onCancel }) {
           ) : (
             <div className="text-stone-400">
               <Upload size={24} className="mx-auto mb-1 text-stone-300" />
-              <p className="text-sm">Перетащите PDF или нажмите</p>
-              <p className="text-xs mt-0.5">Только PDF</p>
+              <p className="text-sm">Drop a PDF here or click to browse</p>
+              <p className="text-xs mt-0.5">PDF only</p>
             </div>
           )}
         </div>
@@ -105,19 +105,19 @@ function AddNoteModal({ onSave, onCancel }) {
       </div>
 
       <div>
-        <label className="label">Ключевые моменты / Заметки</label>
+        <label className="label">Key takeaways / Notes</label>
         <textarea
           className="input resize-none"
           rows={4}
           value={form.notes}
           onChange={e => set('notes', e.target.value)}
-          placeholder="Что важного обсудили? Какие решения приняты? Что запомнилось?"
+          placeholder="What was discussed? What decisions were made? What stood out?"
         />
       </div>
 
       <div className="flex gap-2 pt-1">
-        <button type="submit" className="btn-primary flex-1">Сохранить</button>
-        <button type="button" onClick={onCancel} className="btn-secondary">Отмена</button>
+        <button type="submit" className="btn-primary flex-1">Save</button>
+        <button type="button" onClick={onCancel} className="btn-secondary">Cancel</button>
       </div>
     </form>
   )
@@ -149,7 +149,7 @@ function NoteViewer({ note, onBack, onDelete }) {
         </div>
         <span className={`badge ${cat.color}`}>{cat.emoji} {cat.label}</span>
         <button
-          onClick={() => { if (window.confirm('Удалить эту заметку?')) onDelete(note.id) }}
+          onClick={() => { if (window.confirm('Delete this note?')) onDelete(note.id) }}
           className="btn-ghost p-1.5 text-red-300 hover:text-red-500"
         >
           <Trash2 size={15} />
@@ -158,21 +158,21 @@ function NoteViewer({ note, onBack, onDelete }) {
 
       {note.notes && (
         <div className="card">
-          <h2 className="text-sm font-medium text-stone-600 mb-2">Ключевые моменты</h2>
+          <h2 className="text-sm font-medium text-stone-600 mb-2">Key takeaways</h2>
           <p className="text-sm text-stone-600 whitespace-pre-wrap leading-relaxed">{note.notes}</p>
         </div>
       )}
 
       {pdfUrl ? (
         <div>
-          <h2 className="text-sm font-medium text-stone-600 mb-2">PDF-саммари</h2>
+          <h2 className="text-sm font-medium text-stone-600 mb-2">PDF summary</h2>
           <iframe src={pdfUrl} className="pdf-frame" title={note.title} />
         </div>
       ) : (
         !note.fileData && (
           <div className="card text-center py-6 text-stone-300">
             <FileText size={32} className="mx-auto mb-2" />
-            <p className="text-sm">PDF не прикреплён</p>
+            <p className="text-sm">No PDF attached</p>
           </div>
         )
       )}
@@ -221,11 +221,11 @@ export default function PlaudNotes() {
     <div className="fade-in space-y-5">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-stone-700">Plaud-заметки</h1>
-          <p className="text-sm text-stone-400 mt-0.5">Саммари встреч и разговоров</p>
+          <h1 className="text-xl font-semibold text-stone-700">Plaud notes</h1>
+          <p className="text-sm text-stone-400 mt-0.5">Summaries from meetings and conversations</p>
         </div>
         <button onClick={() => setShowModal(true)} className="btn-primary flex items-center gap-1.5">
-          <Plus size={15} /> Добавить
+          <Plus size={15} /> Add
         </button>
       </div>
 
@@ -236,7 +236,7 @@ export default function PlaudNotes() {
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-300" />
             <input
               className="input pl-9"
-              placeholder="Поиск по заголовку..."
+              placeholder="Search by title..."
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
@@ -246,7 +246,7 @@ export default function PlaudNotes() {
               onClick={() => setFilterCat('all')}
               className={`badge cursor-pointer ${filterCat === 'all' ? 'bg-sage-100 text-sage-700' : 'bg-stone-100 text-stone-500'}`}
             >
-              Все
+              All
             </button>
             {CATEGORIES.map(c => (
               <button
@@ -301,10 +301,10 @@ export default function PlaudNotes() {
         <div className="card text-center py-10 border-dashed border-stone-200">
           <p className="text-3xl mb-3">🎙️</p>
           <p className="text-stone-400 text-sm mb-1">
-            {search || filterCat !== 'all' ? 'Ничего не найдено' : 'Добавьте первую заметку Plaud'}
+            {search || filterCat !== 'all' ? 'Nothing found' : 'Add your first Plaud note'}
           </p>
           {!search && filterCat === 'all' && (
-            <p className="text-stone-300 text-xs">Загружайте PDF-саммари с вашего Plaud устройства</p>
+            <p className="text-stone-300 text-xs">Upload PDF summaries from your Plaud device</p>
           )}
         </div>
       )}
@@ -314,7 +314,7 @@ export default function PlaudNotes() {
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && setShowModal(false)}>
           <div className="modal-box">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-semibold text-stone-700">Новая заметка</h2>
+              <h2 className="font-semibold text-stone-700">New note</h2>
               <button onClick={() => setShowModal(false)} className="btn-ghost p-1.5"><X size={16} /></button>
             </div>
             <AddNoteModal onSave={handleSave} onCancel={() => setShowModal(false)} />

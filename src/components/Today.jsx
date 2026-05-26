@@ -4,22 +4,22 @@ import { CheckCircle2, Circle, Plus, ChevronRight } from 'lucide-react'
 import { db, toDateKey, toggleMedLog } from '../db.js'
 
 const QUOTES = [
-  'Маленький шаг — это всё равно шаг вперёд.',
-  'Сегодня достаточно просто быть.',
-  'Восстановление — это не прямая линия, и это нормально.',
-  'Принять таблетку — это уже забота о себе.',
-  'Ты справляешься лучше, чем кажется.',
-  'Одно действие за раз.',
-  'Тело помнит путь к себе, даже если разум устал.',
-  'Заботиться о себе — это работа, которую никто не видит, но она важна.',
+  'A small step is still a step forward.',
+  'Today it is enough to simply be.',
+  'Recovery is not a straight line, and that is okay.',
+  'Taking your pill is already an act of self-care.',
+  'You are handling this better than it feels.',
+  'One action at a time.',
+  'The body remembers the way back to itself, even when the mind is tired.',
+  'Caring for yourself is work no one sees, but it matters deeply.',
 ]
 
 function getGreeting() {
   const h = new Date().getHours()
-  if (h < 6)  return 'Доброй ночи'
-  if (h < 12) return 'Доброе утро'
-  if (h < 18) return 'Добрый день'
-  return 'Добрый вечер'
+  if (h < 6)  return 'Good night'
+  if (h < 12) return 'Good morning'
+  if (h < 18) return 'Good afternoon'
+  return 'Good evening'
 }
 
 export default function Today({ navigate }) {
@@ -51,7 +51,7 @@ export default function Today({ navigate }) {
     await toggleMedLog(medId, today)
   }
 
-  const dateStr = new Date().toLocaleDateString('ru-RU', {
+  const dateStr = new Date().toLocaleDateString('en-US', {
     weekday: 'long', day: 'numeric', month: 'long',
   })
 
@@ -67,7 +67,7 @@ export default function Today({ navigate }) {
       {/* Progress */}
       <div className="card">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="font-semibold text-stone-700">Прогресс сегодня</h2>
+          <h2 className="font-semibold text-stone-700">Today's progress</h2>
           <span className="text-sm text-stone-500">{doneCount} / {totalCount}</span>
         </div>
         <div className="w-full bg-stone-100 rounded-full h-2.5 overflow-hidden">
@@ -77,7 +77,7 @@ export default function Today({ navigate }) {
           />
         </div>
         {pct === 100 && totalCount > 0 && (
-          <p className="text-sage-600 text-sm mt-2 font-medium">🎉 Всё принято сегодня!</p>
+          <p className="text-sage-600 text-sm mt-2 font-medium">🎉 Everything taken today!</p>
         )}
       </div>
 
@@ -85,12 +85,12 @@ export default function Today({ navigate }) {
       {antideps.length > 0 && (
         <div className="card">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="font-semibold text-stone-700">Антидепрессанты</h2>
+            <h2 className="font-semibold text-stone-700">Antidepressants</h2>
             <button
               onClick={() => navigate('meds')}
               className="text-xs text-sage-600 hover:text-sage-700 flex items-center gap-0.5"
             >
-              все <ChevronRight size={13} />
+              all <ChevronRight size={13} />
             </button>
           </div>
           <ul className="space-y-2">
@@ -101,7 +101,7 @@ export default function Today({ navigate }) {
                   <button
                     onClick={() => handleToggle(med.id)}
                     className={`check-circle ${done ? 'check-circle-done' : 'check-circle-todo'}`}
-                    aria-label={done ? 'Отметить как не принято' : 'Отметить как принято'}
+                    aria-label={done ? 'Mark as not taken' : 'Mark as taken'}
                   >
                     {done && <CheckCircle2 size={14} />}
                   </button>
@@ -127,12 +127,12 @@ export default function Today({ navigate }) {
       {supps.length > 0 && (
         <div className="card">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="font-semibold text-stone-700">Суплементы</h2>
+            <h2 className="font-semibold text-stone-700">Supplements</h2>
             <button
               onClick={() => navigate('meds')}
               className="text-xs text-sage-600 hover:text-sage-700 flex items-center gap-0.5"
             >
-              изменить <ChevronRight size={13} />
+              edit <ChevronRight size={13} />
             </button>
           </div>
           <ul className="space-y-2">
@@ -168,12 +168,12 @@ export default function Today({ navigate }) {
       {/* Exercise */}
       <div className="card">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="font-semibold text-stone-700">Спорт сегодня</h2>
+          <h2 className="font-semibold text-stone-700">Exercise today</h2>
           <button
             onClick={() => navigate('exercise')}
             className="text-xs text-sage-600 hover:text-sage-700 flex items-center gap-0.5"
           >
-            трекер <ChevronRight size={13} />
+            tracker <ChevronRight size={13} />
           </button>
         </div>
         {todayExercise ? (
@@ -181,7 +181,7 @@ export default function Today({ navigate }) {
             <span className="text-2xl">✅</span>
             <div>
               <p className="text-sm font-medium text-stone-700">{todayExercise.type}</p>
-              <p className="text-xs text-stone-400">{todayExercise.duration} мин · {todayExercise.intensity}</p>
+              <p className="text-xs text-stone-400">{todayExercise.duration} min · {todayExercise.intensity}</p>
             </div>
           </div>
         ) : (
@@ -190,7 +190,7 @@ export default function Today({ navigate }) {
             className="flex items-center gap-2 text-sm text-stone-400 hover:text-sage-600 transition-colors"
           >
             <Plus size={16} />
-            Записать тренировку
+            Log a workout
           </button>
         )}
       </div>
@@ -198,9 +198,9 @@ export default function Today({ navigate }) {
       {/* No medications yet */}
       {(!medications || medications.length === 0) && (
         <div className="card border-dashed border-stone-200 text-center py-8">
-          <p className="text-stone-400 text-sm mb-3">Добавьте препараты и суплементы в трекере</p>
+          <p className="text-stone-400 text-sm mb-3">Add your medications and supplements in the tracker</p>
           <button onClick={() => navigate('meds')} className="btn-primary">
-            Настроить препараты
+            Set up medications
           </button>
         </div>
       )}

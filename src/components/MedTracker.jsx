@@ -6,12 +6,12 @@ import {
 import { db, toDateKey, toggleMedLog, getMedLogsRange } from '../db.js'
 
 const TYPES = [
-  { value: 'antidepressant', label: 'Антидепрессант' },
-  { value: 'supplement',     label: 'Суплемент / витамин' },
+  { value: 'antidepressant', label: 'Antidepressant' },
+  { value: 'supplement',     label: 'Supplement / vitamin' },
 ]
-const TIMES = ['утром', 'днём', 'вечером', 'на ночь', 'с едой', 'натощак', 'по необходимости']
+const TIMES = ['morning', 'afternoon', 'evening', 'at bedtime', 'with food', 'on empty stomach', 'as needed']
 
-const EMPTY_FORM = { name: '', type: 'supplement', dosage: '', scheduleTime: 'утром', notes: '', active: true }
+const EMPTY_FORM = { name: '', type: 'supplement', dosage: '', scheduleTime: 'morning', notes: '', active: true }
 
 function MedForm({ initial = EMPTY_FORM, onSave, onCancel }) {
   const [form, setForm] = useState(initial)
@@ -26,42 +26,42 @@ function MedForm({ initial = EMPTY_FORM, onSave, onCancel }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
       <div>
-        <label className="label">Название *</label>
+        <label className="label">Name *</label>
         <input className="input" value={form.name} onChange={e => set('name', e.target.value)}
-          placeholder="Например: Сертралин" required />
+          placeholder="E.g. Sertraline" required />
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="label">Тип</label>
+          <label className="label">Type</label>
           <select className="input" value={form.type} onChange={e => set('type', e.target.value)}>
             {TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
           </select>
         </div>
         <div>
-          <label className="label">Дозировка</label>
+          <label className="label">Dosage</label>
           <input className="input" value={form.dosage} onChange={e => set('dosage', e.target.value)}
-            placeholder="50 мг" />
+            placeholder="50 mg" />
         </div>
       </div>
       <div>
-        <label className="label">Время приёма</label>
+        <label className="label">Schedule</label>
         <select className="input" value={form.scheduleTime} onChange={e => set('scheduleTime', e.target.value)}>
           {TIMES.map(t => <option key={t} value={t}>{t}</option>)}
         </select>
       </div>
       <div>
-        <label className="label">Заметки</label>
+        <label className="label">Notes</label>
         <input className="input" value={form.notes} onChange={e => set('notes', e.target.value)}
-          placeholder="Необязательно" />
+          placeholder="Optional" />
       </div>
       <div className="flex items-center gap-2">
         <input type="checkbox" id="active-check" checked={form.active}
           onChange={e => set('active', e.target.checked)} className="rounded" />
-        <label htmlFor="active-check" className="text-sm text-stone-600">Активен (отображать в трекере)</label>
+        <label htmlFor="active-check" className="text-sm text-stone-600">Active (show in tracker)</label>
       </div>
       <div className="flex gap-2 pt-1">
-        <button type="submit" className="btn-primary flex-1">Сохранить</button>
-        <button type="button" onClick={onCancel} className="btn-secondary">Отмена</button>
+        <button type="submit" className="btn-primary flex-1">Save</button>
+        <button type="button" onClick={onCancel} className="btn-secondary">Cancel</button>
       </div>
     </form>
   )
@@ -108,7 +108,7 @@ function CalendarStreak({ medId, logs30 }) {
       </div>
       {streak > 0 && (
         <p className="text-xs text-warm-600 mt-1 flex items-center gap-1">
-          <Flame size={11} /> {streak} дней подряд
+          <Flame size={11} /> {streak}-day streak
         </p>
       )}
     </div>
@@ -122,7 +122,7 @@ function MedItem({ med, taken, onToggle, onEdit, onDelete, logs30, expanded, onE
         <button
           onClick={() => onToggle(med.id)}
           className={`check-circle ${taken ? 'check-circle-done' : 'check-circle-todo'}`}
-          aria-label={taken ? 'Снять отметку' : 'Отметить как принято'}
+          aria-label={taken ? 'Unmark' : 'Mark as taken'}
         >
           {taken && <CheckCircle2 size={14} />}
         </button>
@@ -143,13 +143,13 @@ function MedItem({ med, taken, onToggle, onEdit, onDelete, logs30, expanded, onE
         </div>
 
         <div className="flex items-center gap-1 shrink-0">
-          <button onClick={onExpand} className="btn-ghost p-1.5" title="История">
+          <button onClick={onExpand} className="btn-ghost p-1.5" title="History">
             {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
           </button>
-          <button onClick={() => onEdit(med)} className="btn-ghost p-1.5" title="Изменить">
+          <button onClick={() => onEdit(med)} className="btn-ghost p-1.5" title="Edit">
             <Pencil size={14} />
           </button>
-          <button onClick={() => onDelete(med.id)} className="btn-ghost p-1.5 text-red-300 hover:text-red-500" title="Удалить">
+          <button onClick={() => onDelete(med.id)} className="btn-ghost p-1.5 text-red-300 hover:text-red-500" title="Delete">
             <Trash2 size={14} />
           </button>
         </div>
@@ -157,7 +157,7 @@ function MedItem({ med, taken, onToggle, onEdit, onDelete, logs30, expanded, onE
 
       {expanded && (
         <div className="px-3 pb-3 border-t border-stone-100 mt-1 pt-2">
-          <p className="text-xs text-stone-400 mb-1">Последние 30 дней</p>
+          <p className="text-xs text-stone-400 mb-1">Last 30 days</p>
           <CalendarStreak medId={med.id} logs30={logs30} />
         </div>
       )}
@@ -205,7 +205,7 @@ export default function MedTracker() {
   }
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Удалить этот препарат? История приёма останется.')) return
+    if (!window.confirm('Delete this medication? Your history will be kept.')) return
     await db.medications.delete(id)
   }
 
@@ -220,22 +220,22 @@ export default function MedTracker() {
     <div className="fade-in space-y-5">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-stone-700">Препараты</h1>
-          <p className="text-sm text-stone-400 mt-0.5">Принято сегодня: {doneToday} из {totalActive}</p>
+          <h1 className="text-xl font-semibold text-stone-700">Medications</h1>
+          <p className="text-sm text-stone-400 mt-0.5">Taken today: {doneToday} of {totalActive}</p>
         </div>
         <button
           onClick={() => { setEditingMed(null); setShowModal(true) }}
           className="btn-primary flex items-center gap-1.5"
         >
-          <Plus size={15} /> Добавить
+          <Plus size={15} /> Add
         </button>
       </div>
 
       {/* Tabs */}
       <div className="flex gap-1 bg-stone-100 rounded-xl p-1">
         {[
-          { value: 'antidepressant', label: 'Антидепрессанты' },
-          { value: 'supplement',     label: 'Суплементы' },
+          { value: 'antidepressant', label: 'Antidepressants' },
+          { value: 'supplement',     label: 'Supplements' },
         ].map(t => (
           <button
             key={t.value}
@@ -271,13 +271,13 @@ export default function MedTracker() {
       ) : (
         <div className="card text-center py-8 border-dashed border-stone-200">
           <p className="text-stone-400 text-sm mb-3">
-            {tab === 'antidepressant' ? 'Добавьте ваш антидепрессант' : 'Добавьте суплементы'}
+            {tab === 'antidepressant' ? 'Add your antidepressant' : 'Add your supplements'}
           </p>
           <button
             onClick={() => { setEditingMed(null); setShowModal(true) }}
             className="btn-primary"
           >
-            <Plus size={14} className="inline mr-1" /> Добавить
+            <Plus size={14} className="inline mr-1" /> Add
           </button>
         </div>
       )}
@@ -286,7 +286,7 @@ export default function MedTracker() {
       {inactive.length > 0 && (
         <details className="group">
           <summary className="text-xs text-stone-400 cursor-pointer hover:text-stone-600 select-none">
-            Неактивные ({inactive.length}) ▾
+            Inactive ({inactive.length}) ▾
           </summary>
           <ul className="space-y-2 mt-2 opacity-60">
             {inactive.map(med => (
@@ -312,7 +312,7 @@ export default function MedTracker() {
           <div className="modal-box">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-semibold text-stone-700">
-                {editingMed ? 'Изменить препарат' : 'Новый препарат'}
+                {editingMed ? 'Edit medication' : 'New medication'}
               </h2>
               <button onClick={() => setShowModal(false)} className="btn-ghost p-1.5">
                 <X size={16} />

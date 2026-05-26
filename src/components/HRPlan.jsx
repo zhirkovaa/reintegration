@@ -2,11 +2,11 @@ import React, { useState, useRef, useCallback } from 'react'
 import { Upload, FileSpreadsheet, X, Download, RefreshCw } from 'lucide-react'
 
 const STATUS_OPTIONS = [
-  { value: '',           label: '—',              color: '' },
-  { value: 'todo',       label: 'В планах',       color: 'bg-stone-100 text-stone-600' },
-  { value: 'inprogress', label: 'В процессе',     color: 'bg-warm-100 text-warm-700' },
-  { value: 'done',       label: 'Готово',         color: 'bg-sage-100 text-sage-700' },
-  { value: 'blocked',    label: 'Заблокировано',  color: 'bg-red-50 text-red-500' },
+  { value: '',           label: '—',          color: '' },
+  { value: 'todo',       label: 'Planned',    color: 'bg-stone-100 text-stone-600' },
+  { value: 'inprogress', label: 'In progress', color: 'bg-warm-100 text-warm-700' },
+  { value: 'done',       label: 'Done',       color: 'bg-sage-100 text-sage-700' },
+  { value: 'blocked',    label: 'Blocked',    color: 'bg-red-50 text-red-500' },
 ]
 
 export default function HRPlan() {
@@ -26,7 +26,7 @@ export default function HRPlan() {
       'text/csv',
     ]
     if (!allowed.includes(file.type) && !file.name.match(/\.(xlsx|xls|csv)$/i)) {
-      setError('Пожалуйста, загрузите файл .xlsx, .xls или .csv')
+      setError('Please upload a .xlsx, .xls or .csv file')
       return
     }
     setLoading(true)
@@ -39,7 +39,7 @@ export default function HRPlan() {
       const raw  = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' })
 
       if (!raw || raw.length === 0) {
-        setError('Файл пустой или не удалось прочитать данные')
+        setError('File is empty or could not be read')
         setLoading(false)
         return
       }
@@ -50,7 +50,7 @@ export default function HRPlan() {
       setFileName(file.name)
       setRowStatus({})
     } catch (e) {
-      setError('Не удалось прочитать файл. Попробуйте сохранить его как .xlsx.')
+      setError('Could not read the file. Try saving it as .xlsx first.')
     }
     setLoading(false)
   }, [])
@@ -75,15 +75,15 @@ export default function HRPlan() {
     <div className="fade-in space-y-5">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-stone-700">HR-план</h1>
-          <p className="text-sm text-stone-400 mt-0.5">Ваш план реинтеграции от HR</p>
+          <h1 className="text-xl font-semibold text-stone-700">HR Plan</h1>
+          <p className="text-sm text-stone-400 mt-0.5">Your reintegration plan from HR</p>
         </div>
         {data && (
           <button
             onClick={() => { setData(null); setFileName(''); setRowStatus({}) }}
             className="btn-secondary flex items-center gap-1.5"
           >
-            <RefreshCw size={14} /> Загрузить другой
+            <RefreshCw size={14} /> Load another file
           </button>
         )}
       </div>
@@ -101,10 +101,10 @@ export default function HRPlan() {
             onClick={() => fileRef.current.click()}
           >
             <FileSpreadsheet size={40} className="mx-auto mb-3 text-stone-300" />
-            <p className="text-stone-600 font-medium mb-1">Загрузите Excel-файл от HR</p>
-            <p className="text-stone-400 text-sm">Перетащите файл или нажмите для выбора</p>
+            <p className="text-stone-600 font-medium mb-1">Upload the Excel file from HR</p>
+            <p className="text-stone-400 text-sm">Drop a file here or click to browse</p>
             <p className="text-stone-300 text-xs mt-1">.xlsx, .xls, .csv</p>
-            {loading && <p className="text-sage-500 text-sm mt-3">Обрабатываю файл…</p>}
+            {loading && <p className="text-sage-500 text-sm mt-3">Processing file…</p>}
             {error  && <p className="text-red-400 text-sm mt-3">{error}</p>}
           </div>
           <input
@@ -116,12 +116,12 @@ export default function HRPlan() {
           />
 
           <div className="card bg-lavender-50 border-lavender-100">
-            <p className="text-sm text-lavender-700 font-medium mb-1">💡 Как использовать</p>
+            <p className="text-sm text-lavender-700 font-medium mb-1">💡 How to use</p>
             <ul className="text-xs text-lavender-600 space-y-1 list-disc list-inside">
-              <li>Загрузите Excel-файл, который прислала HR</li>
-              <li>Просматривайте задачи и этапы реинтеграции</li>
-              <li>Отмечайте статус каждого пункта</li>
-              <li>Файл не уходит на сервер — всё остаётся в вашем браузере</li>
+              <li>Upload the Excel file sent by HR</li>
+              <li>Browse your tasks and reintegration milestones</li>
+              <li>Mark the status of each row</li>
+              <li>The file never leaves your device — everything stays in your browser</li>
             </ul>
           </div>
         </div>
@@ -133,21 +133,21 @@ export default function HRPlan() {
               <FileSpreadsheet size={20} className="text-sage-500" />
               <div className="flex-1">
                 <p className="text-sm font-medium text-stone-700">{fileName}</p>
-                <p className="text-xs text-stone-400">{total} строк</p>
+                <p className="text-xs text-stone-400">{total} rows</p>
               </div>
             </div>
             <div className="flex gap-4 text-sm">
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-sage-400 inline-block" />
-                <span className="text-stone-600">Готово: {doneCnt}</span>
+                <span className="text-stone-600">Done: {doneCnt}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-warm-400 inline-block" />
-                <span className="text-stone-600">В процессе: {inpCnt}</span>
+                <span className="text-stone-600">In progress: {inpCnt}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-stone-200 inline-block" />
-                <span className="text-stone-400">Всего: {total}</span>
+                <span className="text-stone-400">Total: {total}</span>
               </div>
             </div>
             {total > 0 && (
@@ -167,9 +167,9 @@ export default function HRPlan() {
                 <tr>
                   <th className="text-stone-400 font-normal">#</th>
                   {data.headers.map((h, i) => (
-                    <th key={i}>{h || `Колонка ${i + 1}`}</th>
+                    <th key={i}>{h || `Column ${i + 1}`}</th>
                   ))}
-                  <th>Статус</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -203,7 +203,7 @@ export default function HRPlan() {
           </div>
 
           <p className="text-xs text-stone-300 text-center">
-            Статусы сохраняются пока страница открыта. Обновлять файл — при следующей загрузке.
+            Statuses are saved while the page is open. To update the file, reload and re-upload.
           </p>
         </div>
       )}

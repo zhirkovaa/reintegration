@@ -16,23 +16,23 @@ export const toDateKey = (d = new Date()) =>
 
 export const DEFAULT_MEDICATIONS = [
   {
-    name: 'Антидепрессант',
+    name: 'Antidepressant',
     type: 'antidepressant',
     dosage: '',
-    scheduleTime: 'утром',
-    notes: 'добавьте название и дозировку',
+    scheduleTime: 'morning',
+    notes: 'add the name and dosage',
     active: true,
     sortOrder: 0,
   },
 ]
 
 export const DEFAULT_SUPPLEMENTS = [
-  { name: 'Витамин D3',         type: 'supplement', dosage: '2000 МЕ',   scheduleTime: 'утром',    notes: '',  active: true,  sortOrder: 10 },
-  { name: 'Omega-3 (EPA/DHA)',  type: 'supplement', dosage: '1000 мг',   scheduleTime: 'с едой',   notes: '',  active: true,  sortOrder: 20 },
-  { name: 'Магний (глицинат)',  type: 'supplement', dosage: '300 мг',    scheduleTime: 'вечером',  notes: '',  active: true,  sortOrder: 30 },
-  { name: 'Витамин B12',        type: 'supplement', dosage: '500 мкг',   scheduleTime: 'утром',    notes: '',  active: false, sortOrder: 40 },
-  { name: 'Фолат (B9)',         type: 'supplement', dosage: '400 мкг',   scheduleTime: 'утром',    notes: '',  active: false, sortOrder: 50 },
-  { name: 'Цинк',               type: 'supplement', dosage: '15 мг',     scheduleTime: 'с едой',   notes: '',  active: false, sortOrder: 60 },
+  { name: 'Vitamin D3',        type: 'supplement', dosage: '2000 IU',  scheduleTime: 'morning',   notes: '', active: true,  sortOrder: 10 },
+  { name: 'Omega-3 (EPA/DHA)', type: 'supplement', dosage: '1000 mg',  scheduleTime: 'with food', notes: '', active: true,  sortOrder: 20 },
+  { name: 'Magnesium glycinate',type: 'supplement', dosage: '300 mg',  scheduleTime: 'evening',   notes: '', active: true,  sortOrder: 30 },
+  { name: 'Vitamin B12',       type: 'supplement', dosage: '500 mcg',  scheduleTime: 'morning',   notes: '', active: false, sortOrder: 40 },
+  { name: 'Folate (B9)',       type: 'supplement', dosage: '400 mcg',  scheduleTime: 'morning',   notes: '', active: false, sortOrder: 50 },
+  { name: 'Zinc',              type: 'supplement', dosage: '15 mg',    scheduleTime: 'with food', notes: '', active: false, sortOrder: 60 },
 ]
 
 export async function seedIfEmpty() {
