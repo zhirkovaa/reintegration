@@ -5,7 +5,7 @@ import Today from './components/Today.jsx'
 import MedTracker from './components/MedTracker.jsx'
 import ExerciseTracker from './components/ExerciseTracker.jsx'
 import PlaudNotes from './components/PlaudNotes.jsx'
-import HRPlan from './components/HRPlan.jsx'
+import Plans from './components/Plans.jsx'
 import Resources from './components/Resources.jsx'
 
 export const PAGES = {
@@ -30,7 +30,7 @@ export default function App() {
       case 'meds':      return <MedTracker />
       case 'exercise':  return <ExerciseTracker />
       case 'plaud':     return <PlaudNotes />
-      case 'hrplan':    return <HRPlan />
+      case 'hrplan':    return <Plans />
       case 'resources': return <Resources />
       default:          return <Today navigate={setPage} />
     }

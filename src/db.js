@@ -11,6 +11,17 @@ db.version(1).stores({
   settings:     'key',
 })
 
+// v2 adds treatment task chains
+db.version(2).stores({
+  medications:      '++id, name, type, active, sortOrder',
+  medLogs:          '++id, medicationId, date',
+  exercises:        '++id, date',
+  plaudNotes:       '++id, date, category, title',
+  hrPlanData:       'key',
+  settings:         'key',
+  treatmentTasks:   '++id, dependsOnId, done, dueDate, category',
+})
+
 export const toDateKey = (d = new Date()) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 
