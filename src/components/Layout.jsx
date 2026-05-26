@@ -10,7 +10,7 @@ const NAV_ITEMS = [
   { id: 'meds',      label: 'Meds',      icon: 'Pill' },
   { id: 'exercise',  label: 'Exercise',  icon: 'Activity' },
   { id: 'plaud',     label: 'Plaud',     icon: 'Mic' },
-  { id: 'hrplan',    label: 'HR Plan',   icon: 'ClipboardList' },
+  { id: 'hrplan',    label: 'Plan',      icon: 'ClipboardList' },
   { id: 'resources', label: 'Resources', icon: 'BookOpen' },
 ]
 
