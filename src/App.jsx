@@ -7,14 +7,18 @@ import ExerciseTracker from './components/ExerciseTracker.jsx'
 import PlaudNotes from './components/PlaudNotes.jsx'
 import Plans from './components/Plans.jsx'
 import Resources from './components/Resources.jsx'
+import Journal from './components/Journal.jsx'
+import WorkTracker from './components/WorkTracker.jsx'
 
 export const PAGES = {
-  today:     { id: 'today',     label: 'Сегодня',    icon: 'Sun' },
-  meds:      { id: 'meds',      label: 'Препараты',  icon: 'Pill' },
-  exercise:  { id: 'exercise',  label: 'Спорт',      icon: 'Activity' },
-  plaud:     { id: 'plaud',     label: 'Plaud',      icon: 'Mic' },
-  hrplan:    { id: 'hrplan',    label: 'HR-план',    icon: 'ClipboardList' },
-  resources: { id: 'resources', label: 'Ресурсы',    icon: 'BookOpen' },
+  today:     { id: 'today',     label: 'Today',     icon: 'Sun' },
+  meds:      { id: 'meds',      label: 'Meds',      icon: 'Pill' },
+  exercise:  { id: 'exercise',  label: 'Exercise',  icon: 'Activity' },
+  plaud:     { id: 'plaud',     label: 'Plaud',     icon: 'Mic' },
+  hrplan:    { id: 'hrplan',    label: 'Plan',      icon: 'ClipboardList' },
+  resources: { id: 'resources', label: 'Resources', icon: 'BookOpen' },
+  journal:   { id: 'journal',   label: 'Journal',   icon: 'BookText' },
+  work:      { id: 'work',      label: 'Work',      icon: 'Briefcase' },
 }
 
 export default function App() {
@@ -32,6 +36,8 @@ export default function App() {
       case 'plaud':     return <PlaudNotes />
       case 'hrplan':    return <Plans />
       case 'resources': return <Resources />
+      case 'journal':   return <Journal />
+      case 'work':      return <WorkTracker />
       default:          return <Today navigate={setPage} />
     }
   }
