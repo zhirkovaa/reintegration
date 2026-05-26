@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #f9f7f4;
+    color: #3a3530;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-stone-100 p-5;
+  }
+
+  .btn-primary {
+    @apply bg-sage-500 hover:bg-sage-600 text-white px-4 py-2 rounded-xl font-medium transition-colors duration-150 text-sm;
+  }
+
+  .btn-secondary {
+    @apply bg-stone-100 hover:bg-stone-200 text-stone-700 px-4 py-2 rounded-xl font-medium transition-colors duration-150 text-sm;
+  }
+
+  .btn-ghost {
+    @apply text-stone-500 hover:text-stone-700 hover:bg-stone-100 px-3 py-2 rounded-xl transition-colors duration-150 text-sm;
+  }
+
+  .input {
+    @apply w-full border border-stone-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sage-300 focus:border-sage-400 bg-white;
+  }
+
+  .label {
+    @apply block text-xs font-medium text-stone-500 mb-1;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors duration-150 cursor-pointer;
+  }
+
+  .nav-item-active {
+    @apply bg-sage-50 text-sage-700;
+  }
+
+  .nav-item-inactive {
+    @apply text-stone-500 hover:text-stone-700 hover:bg-stone-50;
+  }
+
+  .check-circle {
+    @apply w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 cursor-pointer flex-shrink-0;
+  }
+
+  .check-circle-done {
+    @apply border-sage-500 bg-sage-500 text-white;
+  }
+
+  .check-circle-todo {
+    @apply border-stone-300 hover:border-sage-400;
+  }
+}
+
+/* Calendar heat cells */
+.heat-cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+/* PDF viewer */
+.pdf-frame {
+  width: 100%;
+  height: 70vh;
+  border: none;
+  border-radius: 12px;
+  background: #f9f7f4;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4cfc9;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b5afa8;
+}
+
+/* Excel table */
+.excel-table {
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  width: 100%;
+}
+.excel-table th {
+  background: #f3f8f5;
+  border: 1px solid #e2ede7;
+  padding: 6px 10px;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.excel-table td {
+  border: 1px solid #eae6e0;
+  padding: 5px 10px;
+  vertical-align: top;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.excel-table tr:hover td {
+  background: #f9f7f4;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+}
+.modal-box {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
