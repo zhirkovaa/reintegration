@@ -324,13 +324,14 @@ function MoodCard({ date, apiKey }) {
       return
     }
     setLoading(true); setError('')
-    await upsert({ mood, energy, notes })
     try {
+      await upsert({ mood, energy, notes })
       const result = await analyzeMood({ mood, energy, notes }, apiKey)
       setAnalysis(result)
       await upsert({ analysis: result, analyzedAt: new Date().toISOString() })
     } catch (e) {
-      setError(e.message)
+      console.error('AI insight error:', e)
+      setError(e.message || 'Failed to connect to AI. Check your API key and network.')
     }
     setLoading(false)
   }
@@ -539,7 +540,7 @@ export default function Today({ navigate }) {
   )
   const apiKeySetting = useLiveQuery(() => db.settings.where('key').equals('claude_api_key').first(), [])
 
-  const apiKey   = apiKeySetting?.value || ''
+  const apiKey   = apiKeySetting?.value?.trim() || ''
   const takenIds = new Set((todayLogs || []).map(l => l.medicationId))
   const antideps = (medications || []).filter(m => m.type === 'antidepressant')
   const supps    = (medications || []).filter(m => m.type === 'supplement')
