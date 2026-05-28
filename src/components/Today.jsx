@@ -5,6 +5,21 @@ import {
   Upload, Clock, Trash2, ChevronRight, Mic,
 } from 'lucide-react'
 import { db, toDateKey, toggleMedLog } from '../db.js'
+import * as pdfjsLib from 'pdfjs-dist'
+import workerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
+pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl
+
+async function extractPDFText(file) {
+  const ab  = await file.arrayBuffer()
+  const pdf = await pdfjsLib.getDocument({ data: ab }).promise
+  const parts = []
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page    = await pdf.getPage(i)
+    const content = await page.getTextContent()
+    parts.push(content.items.map(it => it.str).join(' '))
+  }
+  return parts.join('\n').trim()
+}
 
 const QUOTES = [
   'A small step is still a step forward.',
@@ -303,18 +318,46 @@ function MoodCard({ date, apiKey }) {
     if (!files.length) return
     const names = []
     let appended = notes
+    let audioCount = 0
 
     for (const file of files) {
-      names.push(file.name)
-      if (file.type === 'text/plain' || file.name.endsWith('.txt')) {
+      const isPDF   = file.type === 'application/pdf' || file.name.endsWith('.pdf')
+      const isTxt   = file.type === 'text/plain'      || file.name.endsWith('.txt')
+      const isAudio = /\.(mp3|m4a|wav|ogg|mp4|aac)$/i.test(file.name)
+
+      if (isPDF) {
+        names.push(`${file.name} (PDF)`)
+        try {
+          const text = await extractPDFText(file)
+          if (text) {
+            appended = appended
+              ? `${appended}\n\n— ${file.name} —\n${text}`
+              : `— ${file.name} —\n${text}`
+          }
+        } catch {
+          names[names.length - 1] = `${file.name} (PDF — could not read)`
+        }
+      } else if (isTxt) {
+        names.push(file.name)
         const text = await file.text()
-        appended = appended
-          ? `${appended}\n\n— ${file.name} —\n${text}`
-          : `— ${file.name} —\n${text}`
+        if (text) {
+          appended = appended
+            ? `${appended}\n\n— ${file.name} —\n${text}`
+            : `— ${file.name} —\n${text}`
+        }
+      } else if (isAudio) {
+        names.push(`${file.name} 🎙️`)
+        audioCount++
+      } else {
+        names.push(file.name)
       }
     }
+
     setFileNames(prev => [...prev, ...names])
     if (appended !== notes) setNotes(appended)
+    if (audioCount > 0) {
+      setError('Audio files cannot be auto-transcribed. Write your notes in the field below, then click AI insight.')
+    }
     e.target.value = ''
   }
 
@@ -393,7 +436,7 @@ function MoodCard({ date, apiKey }) {
           ref={fileRef}
           type="file"
           multiple
-          accept=".txt,.mp3,.m4a,.wav,.ogg,.mp4"
+          accept=".txt,.pdf,.mp3,.m4a,.wav,.ogg,.mp4,.aac"
           className="hidden"
           onChange={handleFileUpload}
         />
