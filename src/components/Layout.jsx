@@ -1,9 +1,9 @@
 import React from 'react'
 import {
-  Sun, Pill, Activity, Mic, ClipboardList, BookOpen, BookText, Briefcase,
+  Sun, Pill, Activity, Mic, ClipboardList, BookOpen, BookText, Briefcase, SlidersHorizontal,
 } from 'lucide-react'
 
-const ICON_MAP = { Sun, Pill, Activity, Mic, ClipboardList, BookOpen, BookText, Briefcase }
+const ICON_MAP = { Sun, Pill, Activity, Mic, ClipboardList, BookOpen, BookText, Briefcase, SlidersHorizontal }
 
 const NAV_ITEMS = [
   { id: 'today',     label: 'Today',     icon: 'Sun' },
@@ -14,6 +14,7 @@ const NAV_ITEMS = [
   { id: 'resources', label: 'Resources', icon: 'BookOpen' },
   { id: 'journal',   label: 'Journal',   icon: 'BookText' },
   { id: 'work',      label: 'Work',      icon: 'Briefcase' },
+  { id: 'settings',  label: 'Settings',  icon: 'SlidersHorizontal' },
 ]
 
 function NavItem({ item, active, onClick }) {

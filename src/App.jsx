@@ -9,6 +9,7 @@ import Plans from './components/Plans.jsx'
 import Resources from './components/Resources.jsx'
 import Journal from './components/Journal.jsx'
 import WorkTracker from './components/WorkTracker.jsx'
+import Settings from './components/Settings.jsx'
 
 export const PAGES = {
   today:     { id: 'today',     label: 'Today',     icon: 'Sun' },
@@ -19,6 +20,7 @@ export const PAGES = {
   resources: { id: 'resources', label: 'Resources', icon: 'BookOpen' },
   journal:   { id: 'journal',   label: 'Journal',   icon: 'BookText' },
   work:      { id: 'work',      label: 'Work',      icon: 'Briefcase' },
+  settings:  { id: 'settings',  label: 'Settings',  icon: 'SlidersHorizontal' },
 }
 
 export default function App() {
@@ -36,8 +38,9 @@ export default function App() {
       case 'plaud':     return <PlaudNotes />
       case 'hrplan':    return <Plans />
       case 'resources': return <Resources />
-      case 'journal':   return <Journal />
+      case 'journal':   return <Journal navigate={setPage} />
       case 'work':      return <WorkTracker />
+      case 'settings':  return <Settings />
       default:          return <Today navigate={setPage} />
     }
   }

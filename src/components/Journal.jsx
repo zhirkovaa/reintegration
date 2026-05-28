@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLiveQuery } from 'dexie-react-hooks'
-import { ExternalLink, Save, Sparkles, Copy, Check, Settings, X, Loader } from 'lucide-react'
+import { ExternalLink, Save, Sparkles, Copy, Check, Settings, Loader } from 'lucide-react'
 import { db, toDateKey } from '../db.js'
 
 // ── AI call ───────────────────────────────────────────────────────────────────
@@ -55,97 +55,16 @@ Format each line clearly, one per line, exactly as shown above. Be concise.`
   return data.content[0].text
 }
 
-// ── Settings modal ────────────────────────────────────────────────────────────
-
-function SettingsModal({ onClose }) {
-  const stored = useLiveQuery(() =>
-    db.settings.where('key').anyOf(['onedrive_url', 'claude_api_key']).toArray(), []
-  )
-
-  const getValue = (key) => stored?.find(s => s.key === key)?.value || ''
-
-  const [url, setUrl]       = useState('')
-  const [apiKey, setApiKey] = useState('')
-  const [saved, setSaved]   = useState(false)
-
-  useEffect(() => {
-    if (stored) {
-      setUrl(getValue('onedrive_url'))
-      setApiKey(getValue('claude_api_key'))
-    }
-  }, [stored])
-
-  const handleSave = async () => {
-    await db.settings.put({ key: 'onedrive_url',   value: url })
-    await db.settings.put({ key: 'claude_api_key', value: apiKey })
-    setSaved(true)
-    setTimeout(() => { setSaved(false); onClose() }, 800)
-  }
-
-  return (
-    <div className="modal-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
-      <div className="modal-box">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="font-semibold text-stone-700">Settings</h2>
-          <button onClick={onClose} className="btn-ghost p-1.5"><X size={16} /></button>
-        </div>
-
-        <div className="space-y-4">
-          <div>
-            <label className="label">OneDrive / Excel URL</label>
-            <input
-              className="input"
-              type="url"
-              value={url}
-              onChange={e => setUrl(e.target.value)}
-              placeholder="https://onedrive.live.com/…"
-            />
-            <p className="text-xs text-stone-400 mt-1">Paste the sharing link to your Excel file</p>
-          </div>
-
-          <div>
-            <label className="label">Anthropic API key</label>
-            <input
-              className="input font-mono text-xs"
-              type="password"
-              value={apiKey}
-              onChange={e => setApiKey(e.target.value)}
-              placeholder="sk-ant-…"
-            />
-            <p className="text-xs text-stone-400 mt-1">
-              Get a free key at{' '}
-              <a
-                href="https://console.anthropic.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sage-600 underline"
-              >
-                console.anthropic.com
-              </a>
-              . Stored only in your browser.
-            </p>
-          </div>
-
-          <button onClick={handleSave} className={`btn-primary w-full ${saved ? 'bg-sage-600' : ''}`}>
-            {saved ? '✓ Saved' : 'Save'}
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 // ── Main component ────────────────────────────────────────────────────────────
 
-export default function Journal() {
-  const [date,        setDate]        = useState(toDateKey())
-  const [text,        setText]        = useState('')
-  const [analysis,    setAnalysis]    = useState('')
-  const [loading,     setLoading]     = useState(false)
-  const [error,       setError]       = useState('')
-  const [copied,      setCopied]      = useState(false)
-  const [saved,       setSaved]       = useState(false)
-  const [showSettings, setShowSettings] = useState(false)
+export default function Journal({ navigate }) {
+  const [date,     setDate]     = useState(toDateKey())
+  const [text,     setText]     = useState('')
+  const [analysis, setAnalysis] = useState('')
+  const [loading,  setLoading]  = useState(false)
+  const [error,    setError]    = useState('')
+  const [copied,   setCopied]   = useState(false)
+  const [saved,    setSaved]    = useState(false)
 
   const settings = useLiveQuery(() =>
     db.settings.where('key').anyOf(['onedrive_url', 'claude_api_key']).toArray(), []
@@ -239,7 +158,7 @@ export default function Journal() {
             </a>
           )}
           <button
-            onClick={() => setShowSettings(true)}
+            onClick={() => navigate('settings')}
             className="btn-ghost p-2"
             title="Settings"
           >
@@ -252,7 +171,7 @@ export default function Journal() {
       {(!onedriveUrl || !apiKey) && (
         <div
           className="card bg-lavender-50 border-lavender-200 cursor-pointer hover:border-lavender-300 transition-colors"
-          onClick={() => setShowSettings(true)}
+          onClick={() => navigate('settings')}
         >
           <p className="text-sm text-lavender-700">
             <span className="font-medium">⚙️ Quick setup:</span>{' '}
@@ -399,7 +318,6 @@ export default function Journal() {
         </div>
       )}
 
-      {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
     </div>
   )
 }
