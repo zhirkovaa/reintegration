@@ -1,9 +1,9 @@
 import React from 'react'
 import {
-  Sun, Pill, Activity, Mic, ClipboardList, BookOpen,
+  Sun, Pill, Activity, Mic, ClipboardList, BookOpen, BookText, Briefcase,
 } from 'lucide-react'
 
-const ICON_MAP = { Sun, Pill, Activity, Mic, ClipboardList, BookOpen }
+const ICON_MAP = { Sun, Pill, Activity, Mic, ClipboardList, BookOpen, BookText, Briefcase }
 
 const NAV_ITEMS = [
   { id: 'today',     label: 'Today',     icon: 'Sun' },
@@ -12,6 +12,8 @@ const NAV_ITEMS = [
   { id: 'plaud',     label: 'Plaud',     icon: 'Mic' },
   { id: 'hrplan',    label: 'Plan',      icon: 'ClipboardList' },
   { id: 'resources', label: 'Resources', icon: 'BookOpen' },
+  { id: 'journal',   label: 'Journal',   icon: 'BookText' },
+  { id: 'work',      label: 'Work',      icon: 'Briefcase' },
 ]
 
 function NavItem({ item, active, onClick }) {
@@ -66,7 +68,7 @@ export default function Layout({ page, setPage, children }) {
 
       {/* Bottom nav — mobile */}
       <nav className="md:hidden fixed bottom-0 inset-x-0 bg-white border-t border-stone-100 z-40 safe-area-bottom">
-        <div className="flex items-center justify-around h-16 px-1">
+        <div className="flex items-center h-16 px-1 overflow-x-auto scrollbar-none">
           {NAV_ITEMS.map(item => {
             const Icon = ICON_MAP[item.icon]
             const active = page === item.id
@@ -74,7 +76,7 @@ export default function Layout({ page, setPage, children }) {
               <button
                 key={item.id}
                 onClick={() => setPage(item.id)}
-                className={`flex flex-col items-center gap-0.5 px-2 py-1 rounded-xl transition-colors ${
+                className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl transition-colors shrink-0 ${
                   active ? 'text-sage-600' : 'text-stone-400'
                 }`}
               >
