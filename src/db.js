@@ -36,6 +36,22 @@ db.version(3).stores({
   workTasks:        '++id, date, done',
 })
 
+// v4 adds daily mood logs and agenda items
+db.version(4).stores({
+  medications:      '++id, name, type, active, sortOrder',
+  medLogs:          '++id, medicationId, date',
+  exercises:        '++id, date',
+  plaudNotes:       '++id, date, category, title',
+  hrPlanData:       'key',
+  settings:         'key',
+  treatmentTasks:   '++id, dependsOnId, done, dueDate, category',
+  journalEntries:   '++id, date',
+  workLogs:         '++id, date',
+  workTasks:        '++id, date, done',
+  moodLogs:         '++id, date',
+  agendaItems:      '++id, date',
+})
+
 export const toDateKey = (d = new Date()) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 

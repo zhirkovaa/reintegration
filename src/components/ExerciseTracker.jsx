@@ -4,15 +4,17 @@ import { Plus, X, Trash2, TrendingUp } from 'lucide-react'
 import { db, toDateKey } from '../db.js'
 
 const EXERCISE_TYPES = [
-  { value: 'Walk',     emoji: '🚶' },
-  { value: 'Run',      emoji: '🏃' },
-  { value: 'Yoga',     emoji: '🧘' },
-  { value: 'Stretch',  emoji: '🤸' },
-  { value: 'Gym',      emoji: '🏋️' },
-  { value: 'Cycling',  emoji: '🚴' },
-  { value: 'Swimming', emoji: '🏊' },
-  { value: 'Dancing',  emoji: '💃' },
-  { value: 'Other',    emoji: '⚡' },
+  { value: 'Walk',          emoji: '🚶' },
+  { value: 'Run',           emoji: '🏃' },
+  { value: 'Yoga',          emoji: '🧘' },
+  { value: 'Pilates',       emoji: '🧘‍♀️' },
+  { value: 'Home strength', emoji: '💪' },
+  { value: 'Stretch',       emoji: '🤸' },
+  { value: 'Gym',           emoji: '🏋️' },
+  { value: 'Cycling',       emoji: '🚴' },
+  { value: 'Swimming',      emoji: '🏊' },
+  { value: 'Dancing',       emoji: '💃' },
+  { value: 'Other',         emoji: '⚡' },
 ]
 
 const INTENSITIES = [
